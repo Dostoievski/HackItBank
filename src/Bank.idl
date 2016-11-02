@@ -1,0 +1,17 @@
+interface BankAccount {
+  void deposit (in unsigned long amount);
+  void withdraw (in unsigned long amount);
+  long balance();
+};
+
+interface Bank {
+  InterBank connect ();                                                                               // signaler son existence à l'interbank
+  BankAccount create ();                                                                              // pour créer un compte à un client
+  void destroy (in BankAccount a);                                                                    // pour supprimer le compte d'un client
+};
+
+interface InterBank {
+  void addTransaction (in Bank bank_target, in BankAccount client_target, in unsigned long transation_amount);
+  void updateTransaction (in unsigned long id_transaction, in boolean status);
+  string getTable (); // Vector at the end
+};
